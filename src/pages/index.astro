@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Parents in Tech">
+	<main>
+		<div class="container">
+			<div class="content">
+				<h1>Parents in Tech</h1>
+				<p>Uniting parents in the tech industry to foster a collaborative community.</p>
+				<div class="cta-buttons">
+					<a href="https://github.com/parents-in-tech" class="cta-button primary">Join Us on GitHub</a>
+					<a href="#" class="cta-button secondary">Donate</a>
+				</div>
+			</div>
+			<div class="sections">
+				<div class="section">
+					<h2>Our Mission</h2>
+					<p>To unite parents in the tech industry, fostering a collaborative community where we leverage our expertise to create innovative, open-source projects that inspire and educate children, while championing a balanced approach to tech careers and family life.</p>
+				</div>
+				<div class="section">
+					<h2>Our Vision</h2>
+					<p>To be the leading global community for tech-savvy parents, recognized for empowering families with cutting-edge, accessible educational tools and inspiring the next generation of digital innovators, all while promoting a supportive culture that celebrates the unique blend of parenting and technology.</p>
+				</div>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1.5rem;
+		text-align: center;
+		color: white;
+	}
+	.container {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+	.content h1 {
+		font-size: 3rem;
+		font-weight: 800;
+		margin-bottom: 1rem;
+	}
+	.content p {
+		font-size: 1.25rem;
+		margin-bottom: 2rem;
+	}
+	.cta-buttons {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+	}
+	.cta-button {
+		padding: 0.75rem 1.5rem;
+		border-radius: 0.5rem;
+		text-decoration: none;
+		font-weight: 600;
+		transition: background-color 0.3s ease;
+	}
+	.cta-button.primary {
+		background-color: #883aee;
+		color: white;
+	}
+	.cta-button.primary:hover {
+		background-color: #6f2dbd;
+	}
+	.cta-button.secondary {
+		background-color: transparent;
+		border: 1px solid #883aee;
+		color: #883aee;
+	}
+	.cta-button.secondary:hover {
+		background-color: #883aee;
+		color: white;
+	}
+	.sections {
+		margin-top: 4rem;
+		text-align: left;
+	}
+	.section {
+		margin-bottom: 2rem;
+	}
+	.section h2 {
+		font-size: 2rem;
+		font-weight: 700;
+		margin-bottom: 1rem;
+	}
+</style>
