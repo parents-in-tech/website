@@ -1,0 +1,85 @@
+name = "parentsintech-org"
+main = "./dist/_worker.js"
+compatibility_date = "2024-07-15"
+compatibility_flags = ["nodejs_compat"]
+
+# Asset handling
+[assets]
+binding = "ASSETS"
+directory = "./dist"
+
+[observability]
+enabled = true
+
+# Uncomment and configure these as needed
+# [env.production]
+# name = "parentsintech-org-prod"
+# route = "parentsintech.org/*"
+
+# [env.staging]
+# name = "parentsintech-org-staging"
+# route = "staging.parentsintech.org/*"
+
+# Example environment variables
+# [vars]
+# ENVIRONMENT = "production"
+# API_BASE_URL = "https://api.parentsintech.org"
+
+# Example KV namespace binding
+# [[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "your-kv-namespace-id"
+# preview_id = "your-preview-kv-namespace-id"
+
+# Example D1 database binding
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "parentsintech-db"
+# database_id = "your-d1-database-id"
+
+# Example R2 bucket binding
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "parentsintech-assets"
+
+# Example Durable Object binding
+# [[durable_objects.bindings]]
+# name = "MY_DURABLE_OBJECT"
+# class_name = "MyDurableObject"
+
+# Example service binding
+# [[services]]
+# binding = "MY_SERVICE"
+# service = "my-service-name"
+# environment = "production"
+
+# Example analytics engine binding
+# [[analytics_engine_datasets]]
+# binding = "AE"
+# dataset = "parentsintech_analytics"
+
+# Example queue binding
+# [[queues.producers]]
+# binding = "MY_QUEUE"
+# queue = "parentsintech-queue"
+
+# [[queues.consumers]]
+# queue = "parentsintech-queue"
+# max_batch_size = 10
+# max_batch_timeout = 5
+
+# Example vectorize binding
+# [[vectorize]]
+# binding = "VECTORIZE_INDEX"
+# index_name = "parentsintech-embeddings"
+
+# Example hyperdrive binding
+# [[hyperdrive]]
+# binding = "HYPERDRIVE"
+# id = "your-hyperdrive-id"
+
+# Custom build command
+# [build]
+# command = "npm run build"
+# cwd = "."
+# watch_dir = "src"
