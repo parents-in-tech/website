@@ -1,5 +1,5 @@
-name = 'pit-website'
-main = "./dist/_worker.js"
+name = "pit-website"
+main = "./dist/_worker.js/index.js"
 compatibility_date = "2024-07-15"
 compatibility_flags = ["nodejs_compat"]
 
