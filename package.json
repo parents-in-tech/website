@@ -6,10 +6,20 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "astro build && wrangler pages deploy dist",
+    "deploy:staging": "astro build && wrangler pages deploy dist --env staging",
+    "wrangler:dev": "astro build && wrangler pages dev dist",
+    "wrangler:preview": "wrangler pages dev dist",
+    "wrangler:tail": "wrangler tail",
+    "wrangler:login": "wrangler login",
+    "wrangler:whoami": "wrangler whoami"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.0",
     "astro": "^5.12.1"
+  },
+  "devDependencies": {
+    "wrangler": "^3.78.12"
   }
 }
