@@ -5,9 +5,9 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="Projects - Parents in Tech">
 	<main>
 		<div class="container">
-			<div class="header">
+			<div class="hero-section">
 				<h1>Our Projects</h1>
-				<p>Open-source projects created by the Parents in Tech community to inspire, educate, and empower families through technology.</p>
+				<p class="hero-subtitle">Open-source projects created by the Parents in Tech community to inspire, educate, and empower families through technology.</p>
 			</div>
 			
 			<div class="loading" id="loading">
@@ -15,8 +15,10 @@ import Layout from '../layouts/Layout.astro';
 				<p>Loading projects...</p>
 			</div>
 			
-			<div class="projects-grid" id="projects-grid" style="display: none;">
+			<div class="content-grid">
+                <section class="projects" id="projects-grid">
 				<!-- Projects will be rendered here -->
+                 </section>
 			</div>
 			
 			<div class="error-message" id="error-message" style="display: none;">
@@ -74,8 +76,7 @@ import Layout from '../layouts/Layout.astro';
     const topics = repo.topics?.slice(0, 3) || [];
     
     return `
-      <div class="project-card">
-        <div class="card-header">
+      <div class="card">
           <h3 class="project-title">
             <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">
               ${repo.name}
@@ -94,7 +95,6 @@ import Layout from '../layouts/Layout.astro';
               </svg>
               ${repo.forks_count}
             </span>
-          </div>
         </div>
         
         <p class="project-description">
@@ -173,7 +173,7 @@ import Layout from '../layouts/Layout.astro';
 <style>
 	main {
 		margin: auto;
-		padding: 1.5rem;
+		padding: 80px 1.5rem 1.5rem;
 		color: white;
 		min-height: 60vh;
 	}
@@ -182,20 +182,30 @@ import Layout from '../layouts/Layout.astro';
 		max-width: 1200px;
 		margin: 0 auto;
 	}
-	
-	.header {
-		text-align: center;
-		margin-bottom: 3rem;
+
+    .content-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
 	}
 	
-	.header h1 {
-		font-size: 2.5rem;
+	.hero-section {
+		text-align: center;
+		margin-bottom: 4rem;
+	}
+
+	.hero-section h1 {
+		font-size: 3rem;
 		font-weight: 800;
 		margin-bottom: 1rem;
+		background: linear-gradient(135deg, #883aee, #a855f7);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
 	}
-	
-	.header p {
-		font-size: 1.1rem;
+
+	.hero-subtitle {
+		font-size: 1.25rem;
 		opacity: 0.9;
 		max-width: 600px;
 		margin: 0 auto;
@@ -224,24 +234,23 @@ import Layout from '../layouts/Layout.astro';
 		100% { transform: rotate(360deg); }
 	}
 	
-	.projects-grid {
+	.projects {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 		gap: 1.5rem;
 		margin-top: 2rem;
 	}
-	
-	.project-card {
+
+	.card {
 		background: rgba(255, 255, 255, 0.05);
 		border: 1px solid rgba(255, 255, 255, 0.1);
-		border-radius: 0.75rem;
-		padding: 1.5rem;
-		transition: all 0.3s ease;
+		border-radius: 1rem;
+		padding: 2rem;
 		backdrop-filter: blur(10px);
+		transition: all 0.3s ease;
 	}
-	
-	.project-card:hover {
-		transform: translateY(-4px);
+
+	.card:hover {
 		border-color: rgba(136, 58, 238, 0.3);
 		box-shadow: 0 8px 32px rgba(136, 58, 238, 0.1);
 	}
