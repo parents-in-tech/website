@@ -1,0 +1,198 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const url = new URL(Astro.request.url);
+const success = url.searchParams.get('success');
+const error = url.searchParams.get('error');
+---
+
+<Layout title="Join Parents in Tech">
+	<main>
+		<div class="container">
+			<div class="content">
+				<h1>Join Our Community</h1>
+				<p>Request an invite to join the Parents in Tech GitHub organization and connect with fellow tech parents.</p>
+				
+				{success && (
+					<div class="message success">
+						<h3>Invitation Sent!</h3>
+						<p>Check your email for the GitHub organization invitation. Welcome to Parents in Tech!</p>
+					</div>
+				)}
+				
+				{error && (
+					<div class="message error">
+						<h3>Invitation Failed</h3>
+						{error === 'missing-identifier' && <p>Please provide a valid GitHub username or email address.</p>}
+						{error === 'user-not-found' && <p>GitHub user not found. Please check your username and try again.</p>}
+						{error === 'already-member' && <p>You're already a member of the Parents in Tech organization.</p>}
+						{error === 'pending-invitation' && <p>You already have a pending invitation. Check your email for the GitHub invitation.</p>}
+						{error === 'membership-conflict' && <p>GitHub reports you're already associated with this organization, but we can't verify your status. Please check your GitHub notifications or contact us.</p>}
+						{error === 'validation-failed' && <p>GitHub validation failed. Please check your username/email and try again.</p>}
+						{error === 'need-org-admin' && <p>The GitHub token needs organization admin permissions. Please contact the organization owner to set up proper permissions.</p>}
+						{error === 'permission-denied' && <p>Unable to send invitation due to permissions. Please contact us directly.</p>}
+						{error === 'server-config' && <p>Server configuration issue. Please contact us directly.</p>}
+						{error === 'github-api' && <p>GitHub API error. Please try again later.</p>}
+						{!['missing-identifier', 'user-not-found', 'already-member', 'pending-invitation', 'membership-conflict', 'validation-failed', 'need-org-admin', 'permission-denied', 'server-config', 'github-api'].includes(error) && 
+							<p>There was an issue sending your invitation. Please try again or contact us if the problem persists.</p>}
+					</div>
+				)}
+				
+				{!success && (
+					<form method="POST" action="/api/invite" class="invite-form">
+						<div class="form-group">
+							<label for="identifier">GitHub Username or Email</label>
+							<input 
+								type="text" 
+								id="identifier" 
+								name="identifier" 
+								placeholder="your-username or email@example.com"
+								required 
+							/>
+						</div>
+						<button type="submit" class="cta-button primary">Request Invite</button>
+					</form>
+				)}
+				
+				<div class="info-section">
+					<h2>Why Join?</h2>
+					<ul>
+						<li>Connect with other parents in the tech industry</li>
+						<li>Collaborate on open-source projects</li>
+						<li>Share resources and experiences</li>
+						<li>Build tools that inspire and educate children</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1.5rem;
+		color: white;
+		min-height: 60vh;
+	}
+	.container {
+		max-width: 600px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.content h1 {
+		font-size: 2.5rem;
+		font-weight: 800;
+		margin-bottom: 1rem;
+	}
+	.content > p {
+		font-size: 1.1rem;
+		margin-bottom: 2rem;
+		opacity: 0.9;
+	}
+	
+	.message {
+		padding: 1.5rem;
+		border-radius: 0.5rem;
+		margin-bottom: 2rem;
+		text-align: left;
+	}
+	.message.success {
+		background-color: rgba(34, 197, 94, 0.1);
+		border: 1px solid rgba(34, 197, 94, 0.3);
+	}
+	.message.error {
+		background-color: rgba(239, 68, 68, 0.1);
+		border: 1px solid rgba(239, 68, 68, 0.3);
+	}
+	.message h3 {
+		margin: 0 0 0.5rem 0;
+		font-size: 1.25rem;
+	}
+	.message p {
+		margin: 0;
+		opacity: 0.9;
+	}
+	
+	.invite-form {
+		background-color: rgba(255, 255, 255, 0.05);
+		padding: 2rem;
+		border-radius: 0.75rem;
+		margin-bottom: 3rem;
+	}
+	.form-group {
+		margin-bottom: 1.5rem;
+		text-align: left;
+	}
+	.form-group label {
+		display: block;
+		margin-bottom: 0.5rem;
+		font-weight: 600;
+		color: white;
+	}
+	.form-group input {
+		width: 100%;
+		padding: 0.75rem;
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 0.5rem;
+		background-color: rgba(255, 255, 255, 0.1);
+		color: white;
+		font-size: 1rem;
+		box-sizing: border-box;
+	}
+	.form-group input:focus {
+		outline: none;
+		border-color: #883aee;
+		box-shadow: 0 0 0 2px rgba(136, 58, 238, 0.2);
+	}
+	.form-group input::placeholder {
+		color: rgba(255, 255, 255, 0.5);
+	}
+	
+	.cta-button {
+		padding: 0.75rem 2rem;
+		border-radius: 0.5rem;
+		text-decoration: none;
+		font-weight: 600;
+		transition: background-color 0.3s ease;
+		border: none;
+		cursor: pointer;
+		font-size: 1rem;
+	}
+	.cta-button.primary {
+		background-color: #883aee;
+		color: white;
+	}
+	.cta-button.primary:hover {
+		background-color: #6f2dbd;
+	}
+	
+	.info-section {
+		text-align: left;
+		background-color: rgba(255, 255, 255, 0.03);
+		padding: 2rem;
+		border-radius: 0.75rem;
+	}
+	.info-section h2 {
+		font-size: 1.5rem;
+		font-weight: 700;
+		margin-bottom: 1rem;
+		text-align: center;
+	}
+	.info-section ul {
+		list-style: none;
+		padding: 0;
+	}
+	.info-section li {
+		padding: 0.5rem 0;
+		position: relative;
+		padding-left: 1.5rem;
+	}
+	.info-section li::before {
+		content: "✓";
+		position: absolute;
+		left: 0;
+		color: #883aee;
+		font-weight: bold;
+	}
+</style>
