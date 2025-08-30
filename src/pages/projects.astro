@@ -248,11 +248,13 @@ import Layout from '../layouts/Layout.astro';
 		padding: 2rem;
 		backdrop-filter: blur(10px);
 		transition: all 0.3s ease;
+		box-shadow: 0 8px 32px rgba(136, 58, 238, 0.1);
 	}
 
 	.card:hover {
 		border-color: rgba(136, 58, 238, 0.3);
-		box-shadow: 0 8px 32px rgba(136, 58, 238, 0.1);
+		transform: translateY(-2px);
+		box-shadow: 0 12px 36px rgba(136, 58, 238, 0.15);
 	}
 	
 	.card-header {
@@ -270,13 +272,13 @@ import Layout from '../layouts/Layout.astro';
 	}
 	
 	.project-title a {
-		color: white;
+		color: #883aee;
 		text-decoration: none;
 		transition: color 0.3s ease;
 	}
 	
 	.project-title a:hover {
-		color: #883aee;
+		color: #6f2dbd;
 	}
 	
 	.project-stats {

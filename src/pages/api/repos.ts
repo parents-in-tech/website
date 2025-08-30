@@ -1,22 +1,22 @@
 import type { APIRoute } from 'astro';
+import { Octokit } from 'octokit';
 
 export const GET: APIRoute = async () => {
   const token = import.meta.env.GITHUB_TOKEN;
+  const octokit = new Octokit({ auth: token });
   const org = 'parents-in-tech';
-  const url = `https://api.github.com/orgs/${org}/repos`;
 
-  const res = await fetch(url, {
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Accept': 'application/vnd.github+json',
-    },
-  });
+  try {
+    const response = await octokit.request('GET /orgs/{org}/repos', {
+      org: org,
+      headers: {
+        'X-GitHub-Api-Version': '2022-11-28'
+      }
+    });
 
-  if (!res.ok) {
-    const error = await res.json();
-    return new Response(JSON.stringify({ error }), { status: res.status });
+    return new Response(JSON.stringify(response.data), { status: 200 });
+  } catch (error: any) {
+    console.error('Error fetching repos from GitHub:', error);
+    return new Response(JSON.stringify({ error: error.message }), { status: error.status || 500 });
   }
-
-  const data = await res.json();
-  return new Response(JSON.stringify(data), { status: 200 });
 };
