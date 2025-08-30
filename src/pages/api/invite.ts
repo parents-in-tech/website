@@ -1,6 +1,9 @@
 import type { APIRoute } from 'astro';
+import { Octokit } from 'octokit';
 
 export const POST: APIRoute = async ({ request, redirect }) => {
+  const org = 'parents-in-tech';
+
   try {
     const body = await request.formData();
     const identifier = body.get('identifier');
@@ -15,130 +18,98 @@ export const POST: APIRoute = async ({ request, redirect }) => {
       return redirect('/invite?error=server-config');
     }
 
-    const org = 'parents-in-tech';
-    const url = `https://api.github.com/orgs/${org}/invitations`;
+    const octokit = new Octokit({
+      auth: token,
+      request: {
+        headers: {
+          'X-GitHub-Api-Version': '2022-11-28'
+        }
+      }
+    });
 
-    const payload: Record<string, string> = {};
     const trimmedIdentifier = identifier.trim();
+    const payload: { email?: string; invitee_id?: number } = {};
     
     if (trimmedIdentifier.includes('@')) {
       payload.email = trimmedIdentifier;
     } else {
-      // For username, we need to get the user ID first
-      const userUrl = `https://api.github.com/users/${trimmedIdentifier}`;
-      const userRes = await fetch(userUrl, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/vnd.github+json',
-          'X-GitHub-Api-Version': '2022-11-28',
-          'User-Agent': 'Parents in Tech Website'
-        },
-      });
-
-      if (!userRes.ok) {
-        console.error('Failed to fetch user:', await userRes.text());
-        return redirect('/invite?error=user-not-found');
+      try {
+        const userRes = await octokit.request('GET /users/{username}', {
+          username: trimmedIdentifier,
+        });
+        payload.invitee_id = userRes.data.id;
+      } catch (error: any) {
+        if (error.status === 404) {
+          console.error(`User not found: ${trimmedIdentifier}`);
+          return redirect('/invite?error=user-not-found');
+        }
+        throw error; // Re-throw other errors
       }
-
-      const userData = await userRes.json();
-      payload.invitee_id = String(userData.id);
     }
 
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28',
-        'Content-Type': 'application/json',
-        'User-Agent': 'Parents in Tech Website'
-      },
-      body: JSON.stringify(payload),
-    });
+    // Main invitation request
+    try {
+      await octokit.request('POST /orgs/{org}/invitations', {
+        org,
+        ...payload
+      });
+    } catch (error: any) {
+      console.error('GitHub API error during invitation:', error.status, error.response?.data);
 
-    if (!res.ok) {
-      const responseBody = await res.text();
-      let errorData;
-      try {
-        errorData = JSON.parse(responseBody);
-      } catch (e) {
-        errorData = { message: responseBody };
-      }
-      console.error('GitHub API error:', res.status, errorData);
-      
-      // Handle specific GitHub API errors
-      if (res.status === 422) {
-        // Check if it's specifically about existing membership
-        const errors = errorData.errors || [];
-        
-        const membershipError = errors.find((err: any) => 
-          err.message?.includes('already a part of this organization') ||
-          err.message?.includes('already a member') ||
-          err.message?.includes('pending invitation')
-        );
-        
-        if (membershipError) {
-          // Let's check if they actually are a member or have a pending invitation
+      if (error.status === 422) {
+        const errorMessage = error.response?.data?.errors?.[0]?.message || '';
+        const isMembershipError = errorMessage.includes('already a part of this organization') ||
+                                  errorMessage.includes('already a member') ||
+                                  errorMessage.includes('pending invitation');
+
+        if (isMembershipError) {
+          // Secondary check for membership status as the error is ambiguous
           try {
-            // Check membership status
-            const memberUrl = `https://api.github.com/orgs/${org}/members/${trimmedIdentifier}`;
-            const memberRes = await fetch(memberUrl, {
-              headers: {
-                'Authorization': `Bearer ${token}`,
-                'Accept': 'application/vnd.github+json',
-                'X-GitHub-Api-Version': '2022-11-28',
-                'User-Agent': 'Parents in Tech Website'
-              },
+            // Check if they are already a member
+            await octokit.request('GET /orgs/{org}/members/{username}', {
+              org,
+              username: trimmedIdentifier,
             });
-            
-            if (memberRes.status === 200) {
-              return redirect('/invite?error=already-member');
-            } else if (memberRes.status === 404) {
-              // Not a public member, check pending invitations
-              const invitationsUrl = `https://api.github.com/orgs/${org}/invitations`;
-              const invitationsRes = await fetch(invitationsUrl, {
-                headers: {
-                  'Authorization': `Bearer ${token}`,
-                  'Accept': 'application/vnd.github+json',
-                  'X-GitHub-Api-Version': '2022-11-28',
-                  'User-Agent': 'Parents in Tech Website'
-                },
-              });
-              
-              if (invitationsRes.ok) {
-                const invitations = await invitationsRes.json();
-                const hasPendingInvite = invitations.some((inv: any) => 
-                  inv.email === trimmedIdentifier || 
-                  inv.login === trimmedIdentifier
+            // If the above doesn't throw, they are a member
+            return redirect('/invite?error=already-member');
+          } catch (memberError: any) {
+            if (memberError.status === 404) {
+              // Not a member, check for pending invitations
+              try {
+                const invitationsRes = await octokit.request('GET /orgs/{org}/invitations', {
+                  org,
+                });
+                const hasPendingInvite = invitationsRes.data.some((inv: any) =>
+                  inv.email === trimmedIdentifier || inv.login === trimmedIdentifier
                 );
-                
                 if (hasPendingInvite) {
                   return redirect('/invite?error=pending-invitation');
                 }
+              } catch (invitationError: any) {
+                console.error('Error checking for pending invitations:', invitationError);
               }
+            } else {
+               console.error('Error checking membership:', memberError);
             }
-          } catch (checkError) {
-            console.error('Error checking membership:', checkError);
           }
-          
+          // If checks are inconclusive but there was a 422, redirect
           return redirect('/invite?error=membership-conflict');
         }
-        
         return redirect('/invite?error=validation-failed');
-      } else if (res.status === 403) {
-        const errorText = JSON.stringify(errorData);
+      } else if (error.status === 403) {
+        const errorText = JSON.stringify(error.response?.data || {});
         if (errorText.includes('admin to create an invitation')) {
           return redirect('/invite?error=need-org-admin');
         }
         return redirect('/invite?error=permission-denied');
-      } else {
-        return redirect('/invite?error=github-api');
       }
+
+      return redirect('/invite?error=github-api');
     }
 
     return redirect('/invite?success=true');
     
-  } catch (error) {
+  } catch (error: any) {
     console.error('Unexpected error in invite API:', error);
     return redirect('/invite?error=unexpected');
   }
