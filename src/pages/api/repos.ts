@@ -15,7 +15,13 @@ export const GET: APIRoute = async () => {
   });
 
   if (!res.ok) {
-    const error = await res.json();
+    const responseBody = await res.text();
+    let error;
+    try {
+      error = JSON.parse(responseBody);
+    } catch (e) {
+      error = { message: responseBody };
+    }
     return new Response(JSON.stringify({ error }), { status: res.status });
   }
 

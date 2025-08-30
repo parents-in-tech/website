@@ -57,7 +57,13 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     });
 
     if (!res.ok) {
-      const errorData = await res.json().catch(() => ({}));
+      const responseBody = await res.text();
+      let errorData;
+      try {
+        errorData = JSON.parse(responseBody);
+      } catch (e) {
+        errorData = { message: responseBody };
+      }
       console.error('GitHub API error:', res.status, errorData);
       
       // Handle specific GitHub API errors
