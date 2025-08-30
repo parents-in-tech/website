@@ -31,6 +31,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
           'Authorization': `Bearer ${token}`,
           'Accept': 'application/vnd.github+json',
           'X-GitHub-Api-Version': '2022-11-28',
+          'User-Agent': 'Parents in Tech Website'
         },
       });
 
@@ -50,6 +51,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
         'Accept': 'application/vnd.github+json',
         'X-GitHub-Api-Version': '2022-11-28',
         'Content-Type': 'application/json',
+        'User-Agent': 'Parents in Tech Website'
       },
       body: JSON.stringify(payload),
     });
@@ -79,6 +81,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
                 'Authorization': `Bearer ${token}`,
                 'Accept': 'application/vnd.github+json',
                 'X-GitHub-Api-Version': '2022-11-28',
+                'User-Agent': 'Parents in Tech Website'
               },
             });
             
@@ -92,6 +95,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
                   'Authorization': `Bearer ${token}`,
                   'Accept': 'application/vnd.github+json',
                   'X-GitHub-Api-Version': '2022-11-28',
+                  'User-Agent': 'Parents in Tech Website'
                 },
               });
               
