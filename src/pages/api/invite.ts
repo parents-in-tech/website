@@ -18,24 +18,23 @@ export const POST: APIRoute = async ({ request, redirect }) => {
       return redirect('/invite?error=server-config');
     }
 
-    const octokit = new Octokit({
-      auth: token,
-      request: {
-        headers: {
-          'X-GitHub-Api-Version': '2022-11-28'
-        }
-      }
-    });
-
+    const octokit = new Octokit({ auth: token });
     const trimmedIdentifier = identifier.trim();
-    const payload: { email?: string; invitee_id?: number } = {};
+    
+    // Determine if it's an email or username
+    let payload: { email?: string; invitee_id?: number } = {};
     
     if (trimmedIdentifier.includes('@')) {
+      // It's an email address
       payload.email = trimmedIdentifier;
     } else {
+      // It's a username, get the user ID
       try {
         const userRes = await octokit.request('GET /users/{username}', {
           username: trimmedIdentifier,
+          headers: {
+            'X-GitHub-Api-Version': '2022-11-28'
+          }
         });
         payload.invitee_id = userRes.data.id;
       } catch (error: any) {
@@ -47,11 +46,14 @@ export const POST: APIRoute = async ({ request, redirect }) => {
       }
     }
 
-    // Main invitation request
+    // Create the organization invitation
     try {
       await octokit.request('POST /orgs/{org}/invitations', {
         org,
-        ...payload
+        ...payload,
+        headers: {
+          'X-GitHub-Api-Version': '2022-11-28'
+        }
       });
     } catch (error: any) {
       console.error('GitHub API error during invitation:', error.status, error.response?.data);
@@ -63,12 +65,14 @@ export const POST: APIRoute = async ({ request, redirect }) => {
                                   errorMessage.includes('pending invitation');
 
         if (isMembershipError) {
-          // Secondary check for membership status as the error is ambiguous
+          // Check if they are already a member
           try {
-            // Check if they are already a member
             await octokit.request('GET /orgs/{org}/members/{username}', {
               org,
               username: trimmedIdentifier,
+              headers: {
+                'X-GitHub-Api-Version': '2022-11-28'
+              }
             });
             // If the above doesn't throw, they are a member
             return redirect('/invite?error=already-member');
@@ -78,6 +82,9 @@ export const POST: APIRoute = async ({ request, redirect }) => {
               try {
                 const invitationsRes = await octokit.request('GET /orgs/{org}/invitations', {
                   org,
+                  headers: {
+                    'X-GitHub-Api-Version': '2022-11-28'
+                  }
                 });
                 const hasPendingInvite = invitationsRes.data.some((inv: any) =>
                   inv.email === trimmedIdentifier || inv.login === trimmedIdentifier
