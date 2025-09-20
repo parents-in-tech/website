@@ -31,7 +31,7 @@ const error = url.searchParams.get('error');
 						{error === 'validation-failed' && <p>GitHub validation failed. Please check your username/email and try again.</p>}
 						{error === 'need-org-admin' && <p>The GitHub token needs organization admin permissions. Please contact the organization owner to set up proper permissions.</p>}
 						{error === 'permission-denied' && <p>Unable to send invitation due to permissions. Please contact us directly.</p>}
-						{error === 'server-config' && <p>Server configuration issue. Please contact us directly.</p>}
+						{error === 'server-config' && <p>Server configuration issue. Please contact us directly at <a href="mailto:hello@parentsintech.org">hello@parentsintech.org</a>.</p>}
 						{error === 'github-api' && <p>GitHub API error. Please try again later.</p>}
 						{!['missing-identifier', 'user-not-found', 'already-member', 'pending-invitation', 'membership-conflict', 'validation-failed', 'need-org-admin', 'permission-denied', 'server-config', 'github-api'].includes(error) && 
 							<p>There was an issue sending your invitation. Please try again or contact us if the problem persists.</p>}

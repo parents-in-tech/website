@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { Octokit } from 'octokit';
 
-export const POST: APIRoute = async ({ request, redirect }) => {
+export const POST: APIRoute = async ({ request, redirect, locals }) => {
   const org = 'parents-in-tech';
 
   try {
@@ -12,7 +12,11 @@ export const POST: APIRoute = async ({ request, redirect }) => {
       return redirect('/invite?error=missing-identifier');
     }
 
-    const token = import.meta.env.GITHUB_TOKEN;
+    const runtimeEnv = (locals as { runtime?: { env?: Record<string, string> } })?.runtime?.env;
+    const token =
+      runtimeEnv?.GITHUB_TOKEN ??
+      (typeof process !== 'undefined' ? process.env.GITHUB_TOKEN : undefined) ??
+      import.meta.env.GITHUB_TOKEN;
     if (!token) {
       console.error('GITHUB_TOKEN environment variable is not set');
       return redirect('/invite?error=server-config');
