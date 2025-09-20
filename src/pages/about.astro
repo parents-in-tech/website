@@ -37,7 +37,7 @@ import Layout from '../layouts/Layout.astro';
 					<h2 class="section-title">High-Level Goals</h2>
 					
 					<div class="goals-grid">
-						<div class="goal-category">
+						<div class="card goal-category">
 							<div class="category-header">
 								<div class="category-icon">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -59,7 +59,7 @@ import Layout from '../layouts/Layout.astro';
 							</ul>
 						</div>
 
-						<div class="goal-category">
+							<div class="card goal-category">
 							<div class="category-header">
 								<div class="category-icon">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -84,7 +84,7 @@ import Layout from '../layouts/Layout.astro';
 							</ul>
 						</div>
 
-						<div class="goal-category">
+							<div class="card goal-category">
 							<div class="category-header">
 								<div class="category-icon">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -113,7 +113,7 @@ import Layout from '../layouts/Layout.astro';
 						</div>
 						
 						<div class="goals-2025-grid">
-							<div class="goal-item">
+							<div class="card goal-item">
 								<div class="goal-icon">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
 										<path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H16c-.8 0-1.54.37-2 1l-3 4v2h2l2.54-3.4L16.5 18H20z"/>
@@ -129,7 +129,7 @@ import Layout from '../layouts/Layout.astro';
 								</div>
 							</div>
 
-							<div class="goal-item">
+							<div class="card goal-item">
 								<div class="goal-icon">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
 										<path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/>
@@ -145,7 +145,7 @@ import Layout from '../layouts/Layout.astro';
 								</div>
 							</div>
 
-							<div class="goal-item">
+							<div class="card goal-item">
 								<div class="goal-icon">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
 										<path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/>
@@ -170,12 +170,8 @@ import Layout from '../layouts/Layout.astro';
 
 <style>
 	main {
-		padding-top: 80px;
-	}
-
-	.about {
 		margin: auto;
-		padding: 1.5rem;
+		padding: 80px 1.5rem 1.5rem;
 		color: white;
 		min-height: 60vh;
 	}
@@ -213,41 +209,47 @@ import Layout from '../layouts/Layout.astro';
 		gap: 3rem;
 	}
 
-	.card {
-		background: rgba(255, 255, 255, 0.05);
-		border: 1px solid rgba(255, 255, 255, 0.1);
-		border-radius: 1rem;
-		padding: 2rem;
-		backdrop-filter: blur(10px);
-		transition: all 0.3s ease;
-	}
-
-	.card:hover {
-		border-color: rgba(136, 58, 238, 0.3);
-		box-shadow: 0 8px 32px rgba(136, 58, 238, 0.1);
-	}
-
 	.mission-vision {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 		gap: 2rem;
 	}
 
+	.mission-card,
+	.vision-card {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+	}
+
 	.card-icon {
-		color: #883aee;
-		margin-bottom: 1rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 3.25rem;
+		height: 3.25rem;
+		border-radius: 1.1rem;
+		background: rgba(136, 58, 238, 0.22);
+		color: #f3e8ff;
+		margin-bottom: 1.25rem;
+	}
+
+	.card-icon svg {
+		width: 24px;
+		height: 24px;
 	}
 
 	.card h2 {
 		font-size: 1.5rem;
 		font-weight: 700;
-		margin-bottom: 1rem;
+		margin: 0;
 		color: white;
 	}
 
 	.card p {
 		line-height: 1.6;
-		opacity: 0.9;
+		opacity: 0.88;
+		margin: 0;
 	}
 
 	.section-title {
@@ -260,26 +262,32 @@ import Layout from '../layouts/Layout.astro';
 
 	.goals-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 		gap: 2rem;
 	}
 
 	.goal-category {
-		background: rgba(255, 255, 255, 0.03);
-		border: 1px solid rgba(255, 255, 255, 0.1);
-		border-radius: 1rem;
-		padding: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		min-height: 100%;
 	}
 
 	.category-header {
 		display: flex;
 		align-items: center;
-		gap: 0.75rem;
-		margin-bottom: 1.5rem;
+		gap: 0.85rem;
 	}
 
 	.category-icon {
-		color: #883aee;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.75rem;
+		height: 2.75rem;
+		border-radius: 0.9rem;
+		background: rgba(136, 58, 238, 0.2);
+		color: #f6edff;
 	}
 
 	.category-header h3 {
@@ -293,33 +301,33 @@ import Layout from '../layouts/Layout.astro';
 		list-style: none;
 		padding: 0;
 		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
 	}
 
 	.goal-list li {
-		margin-bottom: 1.5rem;
 		line-height: 1.6;
 		opacity: 0.9;
 	}
 
-	.goal-list li:last-child {
-		margin-bottom: 0;
-	}
-
 	.goal-list strong {
-		color: #883aee;
+		color: #c084fc;
 		font-weight: 600;
 	}
 
 	.goals-2025-card {
-		background: linear-gradient(135deg, rgba(136, 58, 238, 0.1), rgba(168, 85, 247, 0.05));
-		border-color: rgba(136, 58, 238, 0.2);
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		background: linear-gradient(155deg, rgba(136, 58, 238, 0.6), rgba(41, 16, 78, 0.95));
+		border-color: rgba(168, 85, 247, 0.35);
 	}
 
 	.card-header {
 		display: flex;
 		align-items: center;
 		gap: 1rem;
-		margin-bottom: 2rem;
 	}
 
 	.year-badge {
@@ -338,50 +346,77 @@ import Layout from '../layouts/Layout.astro';
 
 	.goals-2025-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 		gap: 1.5rem;
 	}
 
 	.goal-item {
-		background: rgba(255, 255, 255, 0.05);
-		border: 1px solid rgba(255, 255, 255, 0.1);
-		border-radius: 0.75rem;
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 1rem;
+		align-items: flex-start;
 		padding: 1.5rem;
-		transition: all 0.3s ease;
+		background: linear-gradient(155deg, rgba(28, 11, 55, 0.92), rgba(74, 27, 138, 0.82));
+		border: 1px solid rgba(168, 85, 247, 0.28);
+		box-shadow: 0 20px 36px -24px rgba(9, 5, 35, 0.85);
 	}
 
 	.goal-item:hover {
-		transform: translateY(-2px);
-		border-color: rgba(136, 58, 238, 0.3);
+		transform: translateY(-4px);
+		border-color: rgba(255, 255, 255, 0.28);
+	}
+
+	.goal-item::before {
+		opacity: 0.25;
+	}
+
+	.goal-item:hover::before {
+		opacity: 0.45;
 	}
 
 	.goal-icon {
-		color: #883aee;
-		margin-bottom: 1rem;
+		display: grid;
+		place-items: center;
+		width: 3rem;
+		height: 3rem;
+		border-radius: 1rem;
+		background: rgba(136, 58, 238, 0.22);
+		color: #f6edff;
+	}
+
+	.goal-icon svg {
+		width: 20px;
+		height: 20px;
+	}
+
+	.goal-content {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
 	}
 
 	.goal-content h3 {
 		font-size: 1.25rem;
 		font-weight: 600;
-		margin-bottom: 0.5rem;
+		margin: 0;
 		color: white;
 	}
 
 	.goal-content p {
 		line-height: 1.5;
 		opacity: 0.9;
-		margin-bottom: 1rem;
+		margin: 0;
 	}
 
 	.goal-target {
 		display: flex;
 		flex-direction: column;
-		gap: 0.25rem;
+		gap: 0.35rem;
 	}
 
 	.target-label {
 		font-size: 0.875rem;
-		color: #883aee;
+		color: #c084fc;
 		font-weight: 500;
 	}
 
@@ -393,7 +428,7 @@ import Layout from '../layouts/Layout.astro';
 
 	@media (max-width: 768px) {
 		.hero-section h1 {
-			font-size: 2rem;
+			font-size: 2.25rem;
 		}
 
 		.mission-vision {
@@ -411,13 +446,17 @@ import Layout from '../layouts/Layout.astro';
 		.card-header {
 			flex-direction: column;
 			align-items: flex-start;
-			gap: 0.5rem;
+			gap: 0.75rem;
 		}
 
 		.category-header {
 			flex-direction: column;
 			align-items: flex-start;
-			gap: 0.5rem;
+			gap: 0.6rem;
+		}
+
+		.goal-item {
+			grid-template-columns: 1fr;
 		}
 	}
 </style>
