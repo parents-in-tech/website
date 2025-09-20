@@ -1,9 +1,19 @@
 import type { APIRoute } from 'astro';
 import { Octokit } from 'octokit';
 
-export const GET: APIRoute = async () => {
-  const token = import.meta.env.GITHUB_TOKEN;
-  const octokit = new Octokit({ auth: token });
+export const GET: APIRoute = async ({ locals }) => {
+	const runtimeEnv = (locals as { runtime?: { env?: Record<string, string> } })?.runtime?.env;
+	const token =
+		runtimeEnv?.GITHUB_TOKEN ??
+		(typeof process !== 'undefined' ? process.env.GITHUB_TOKEN : undefined) ??
+		import.meta.env.GITHUB_TOKEN;
+
+	if (!token) {
+		console.error('GITHUB_TOKEN environment variable is not set');
+		return new Response(JSON.stringify({ error: 'Server configuration issue' }), { status: 500 });
+	}
+
+	const octokit = new Octokit({ auth: token });
   const org = 'parents-in-tech';
 
   try {
