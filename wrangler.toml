@@ -1,5 +1,6 @@
 name = "pit-website"
 main = "./dist/_worker.js/index.js"
+account_id = "6d2e606929eb69f91f43b147615f1111"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 
