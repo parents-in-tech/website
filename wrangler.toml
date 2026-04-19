@@ -79,8 +79,7 @@ enabled = true
 # binding = "HYPERDRIVE"
 # id = "your-hyperdrive-id"
 
-# Custom build command
-# [build]
-# command = "npm run build"
-# cwd = "."
-# watch_dir = "src"
+[build]
+command = "npm run build"
+cwd = "."
+watch_dir = "src"
