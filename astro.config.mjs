@@ -9,6 +9,9 @@ export default defineConfig({
   output: 'server',
   adapter: cloudflare(),
   integrations: [react()],
+  session: {
+    driver: 'memory',
+  },
   vite: {
     plugins: [tailwindcss()],
     json: {

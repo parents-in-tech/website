@@ -33,18 +33,24 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.url).toString() : undefined;
     <script is:inline>
       (() => {
         try {
-          const storageKey = 'pit-theme';
+          const modeKey = 'pit-theme-mode';
+          const paletteKey = 'pit-theme-palette';
           const root = document.documentElement;
-          const savedTheme = localStorage.getItem(storageKey);
+          const savedTheme = localStorage.getItem(modeKey);
+          const savedPalette = localStorage.getItem(paletteKey);
           const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           const theme = savedTheme ?? (systemPrefersDark ? 'dark' : 'light');
+          const validPalettes = ['copper', 'blue', 'violet', 'firefly', 'lantern'];
+          const palette = validPalettes.includes(savedPalette ?? '') ? savedPalette : 'copper';
 
           root.classList.toggle('dark', theme === 'dark');
+          root.dataset.palette = palette;
         } catch {
           document.documentElement.classList.toggle(
             'dark',
             window.matchMedia('(prefers-color-scheme: dark)').matches,
           );
+          document.documentElement.dataset.palette = 'copper';
         }
       })();
     </script>
