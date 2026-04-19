@@ -1,0 +1,19 @@
+---
+import { HeaderNav } from '@/components/HeaderNav';
+---
+
+<header class="sticky top-0 z-40 border-b border-border/70 bg-background/88 backdrop-blur-xl">
+  <div class="page-shell flex items-center justify-between gap-4 py-4">
+    <a href="/" class="flex items-center gap-3">
+      <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary text-sm font-semibold text-primary-foreground shadow-[0_16px_32px_-20px_rgba(136,58,238,0.8)]">
+        PiT
+      </span>
+      <span class="flex flex-col">
+        <span class="font-serif text-xl leading-none text-foreground">Parents in Tech</span>
+        <span class="text-xs uppercase tracking-[0.18em] text-muted-foreground">Mission-driven open community</span>
+      </span>
+    </a>
+
+    <HeaderNav client:load />
+  </div>
+</header>

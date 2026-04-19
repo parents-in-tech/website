@@ -1,0 +1,212 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-display);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 0.25rem);
+  --radius-md: calc(var(--radius) - 0.125rem);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.25rem);
+  --radius-2xl: calc(var(--radius) + 1rem);
+}
+
+:root {
+  --font-display: "Newsreader", Georgia, serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", sans-serif;
+  --radius: 1rem;
+
+  --background: #f6f0e6;
+  --foreground: #231b2d;
+  --card: rgba(255, 250, 244, 0.86);
+  --card-foreground: #231b2d;
+  --popover: #fffaf4;
+  --popover-foreground: #231b2d;
+  --primary: #883aee;
+  --primary-foreground: #fdf8ff;
+  --secondary: #ece0d3;
+  --secondary-foreground: #3e3150;
+  --muted: #efe7dc;
+  --muted-foreground: #6e627a;
+  --accent: #f2e8f9;
+  --accent-foreground: #3c245d;
+  --destructive: #b44343;
+  --destructive-foreground: #fff7f7;
+  --border: rgba(56, 39, 79, 0.15);
+  --input: rgba(56, 39, 79, 0.16);
+  --ring: rgba(136, 58, 238, 0.38);
+  --surface-wash-start: rgba(255, 255, 255, 0.68);
+  --surface-wash-end: rgba(255, 248, 241, 0.54);
+  --surface-wash-base: rgba(255, 255, 255, 0.4);
+}
+
+.dark {
+  --background: #16111c;
+  --foreground: #f5ebf8;
+  --card: rgba(31, 24, 39, 0.88);
+  --card-foreground: #f5ebf8;
+  --popover: #21192a;
+  --popover-foreground: #f5ebf8;
+  --primary: #a776f4;
+  --primary-foreground: #160f1c;
+  --secondary: #2a2234;
+  --secondary-foreground: #efe4f6;
+  --muted: #241d2d;
+  --muted-foreground: #b6a6c3;
+  --accent: #31253f;
+  --accent-foreground: #f5ebf8;
+  --destructive: #d66363;
+  --destructive-foreground: #fff4f4;
+  --border: rgba(241, 230, 248, 0.12);
+  --input: rgba(241, 230, 248, 0.14);
+  --ring: rgba(167, 118, 244, 0.45);
+  --surface-wash-start: rgba(38, 29, 48, 0.82);
+  --surface-wash-end: rgba(23, 18, 30, 0.78);
+  --surface-wash-base: rgba(20, 15, 27, 0.62);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at top left, rgba(136, 58, 238, 0.08), transparent 32%),
+      radial-gradient(circle at 85% 18%, rgba(92, 50, 148, 0.08), transparent 28%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.54), rgba(255, 255, 255, 0));
+  }
+
+  .dark body {
+    background-image:
+      radial-gradient(circle at top left, rgba(167, 118, 244, 0.14), transparent 28%),
+      radial-gradient(circle at 85% 18%, rgba(88, 58, 130, 0.22), transparent 24%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif tracking-[-0.02em] text-foreground;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  ::selection {
+    background: rgba(136, 58, 238, 0.18);
+  }
+}
+
+@layer components {
+  .page-shell {
+    @apply mx-auto w-full max-w-6xl px-5 md:px-8;
+  }
+
+  .section-space {
+    @apply py-16 md:py-24;
+  }
+
+  .section-lead {
+    @apply max-w-2xl text-base leading-7 text-muted-foreground md:text-lg;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-border/80 bg-background/80 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-muted-foreground;
+  }
+
+  .editorial-panel {
+    @apply rounded-[2rem] border border-border/70 bg-card shadow-[0_24px_80px_-40px_rgba(46,28,73,0.36)] backdrop-blur-sm;
+  }
+
+  .soft-grid {
+    background-image:
+      linear-gradient(to right, rgba(56, 39, 79, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(56, 39, 79, 0.06) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .section-heading {
+    @apply max-w-3xl space-y-4;
+  }
+
+  .surface-wash {
+    background:
+      linear-gradient(135deg, var(--surface-wash-start), var(--surface-wash-end)),
+      var(--surface-wash-base);
+  }
+
+  .link-subtle {
+    @apply text-muted-foreground hover:text-foreground;
+  }
+
+  .reveal-in {
+    animation: reveal-in 0.7s ease-out both;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,72 @@
+---
+import ContributionPath from '@/components/ContributionPath.astro';
+import Layout from '@/layouts/Layout.astro';
+import PageIntro from '@/components/PageIntro.astro';
+import { ProjectPreview } from '@/components/ProjectPreview';
+import { contributionTracks, journeySteps } from '@/lib/site';
+---
+
+<Layout
+  title="Contribute | Parents in Tech"
+  description="Learn how Parents in Tech handles open-source contribution, what kinds of work are welcome, and how to contribute while staying aligned with the mission."
+>
+  <PageIntro
+    eyebrow="Contribute"
+    title="Contribute in the open, and keep the mission intact."
+    lead="Parents in Tech follows open-source contribution norms and welcomes code, docs, design, testing, and stewardship work that supports the mission."
+  />
+
+  <ContributionPath items={contributionTracks} />
+
+  <section class="section-space pt-2">
+    <div class="page-shell grid gap-6 lg:grid-cols-3">
+      {journeySteps.slice(1).map((step, index) => (
+        <article class="editorial-panel p-7">
+          <div class="eyebrow">Step 0{index + 2}</div>
+          <h2 class="mt-5 text-3xl leading-tight">{step.title}</h2>
+          <p class="mt-4 text-sm leading-7 text-muted-foreground">{step.description}</p>
+          {step.href && (
+            <a href={step.href} class="mt-6 inline-flex text-sm font-semibold text-primary hover:text-primary/80">
+              Go there
+            </a>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <ProjectPreview
+    client:visible
+    limit={6}
+    title="Current repositories you can learn from or contribute to"
+    lead="These cards come from the live GitHub organization so contributors can inspect the real codebases and follow demos when they exist."
+  />
+
+  <section class="section-space pt-4">
+    <div class="page-shell">
+      <div class="editorial-panel grid gap-6 overflow-hidden lg:grid-cols-[1fr_auto] lg:items-center">
+        <div class="surface-wash p-8 md:p-10">
+          <div class="eyebrow">Ready when you are</div>
+          <h2 class="mt-5 text-4xl leading-tight md:text-5xl">Join the community, read the repos, and contribute in the open.</h2>
+          <p class="mt-5 max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
+            The sequence is simple on purpose: community context first, then GitHub access, then mission-aligned contributions that fit your time and strengths.
+          </p>
+        </div>
+        <div class="flex flex-col gap-3 px-8 pb-8 lg:pr-10 lg:pb-0">
+          <a
+            href="/projects"
+            class="inline-flex h-11 items-center justify-center rounded-full border border-border bg-background/80 px-5 text-sm font-medium text-foreground transition hover:bg-accent hover:text-accent-foreground"
+          >
+            Explore projects
+          </a>
+          <a
+            href="/invite#github-invite"
+            class="inline-flex h-11 items-center justify-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground shadow-[0_18px_40px_-22px_rgba(136,58,238,0.85)] transition hover:bg-primary/92"
+          >
+            Request GitHub access
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
