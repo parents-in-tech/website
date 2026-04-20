@@ -1,12 +1,9 @@
 import type { APIRoute } from 'astro';
+import { env } from 'cloudflare:workers';
 import { Octokit } from 'octokit';
 
-export const GET: APIRoute = async ({ locals }) => {
-	const runtimeEnv = (locals as { runtime?: { env?: Record<string, string> } })?.runtime?.env;
-	const token =
-		runtimeEnv?.GITHUB_TOKEN ??
-		(typeof process !== 'undefined' ? process.env.GITHUB_TOKEN : undefined) ??
-		import.meta.env.GITHUB_TOKEN;
+export const GET: APIRoute = async () => {
+	const token = env.GITHUB_TOKEN ?? import.meta.env.GITHUB_TOKEN;
 
 	if (!token) {
 		console.error('GITHUB_TOKEN environment variable is not set');
