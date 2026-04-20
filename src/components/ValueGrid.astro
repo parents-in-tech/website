@@ -1,0 +1,31 @@
+---
+import type { ValuePillar } from '@/lib/site';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  items: ValuePillar[];
+}
+
+const { eyebrow, title, lead, items } = Astro.props;
+---
+
+<section class="section-space">
+  <div class="page-shell">
+    <div class="section-heading">
+      <div class="eyebrow">{eyebrow}</div>
+      <h2 class="text-4xl leading-tight text-balance md:text-5xl">{title}</h2>
+      <p class="section-lead">{lead}</p>
+    </div>
+
+    <div class="mt-10 grid gap-6 lg:grid-cols-3">
+      {items.map((item) => (
+        <article class="editorial-panel p-7 md:p-8">
+          <h3 class="text-2xl">{item.title}</h3>
+          <p class="mt-4 text-sm leading-7 text-muted-foreground md:text-base">{item.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

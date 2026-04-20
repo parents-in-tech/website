@@ -1,5 +1,6 @@
 name = "pit-website"
 main = "@astrojs/cloudflare/entrypoints/server"
+account_id = "6d2e606929eb69f91f43b147615f1111"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
 
@@ -77,9 +78,3 @@ enabled = true
 # [[hyperdrive]]
 # binding = "HYPERDRIVE"
 # id = "your-hyperdrive-id"
-
-# Custom build command
-# [build]
-# command = "npm run build"
-# cwd = "."
-# watch_dir = "src"

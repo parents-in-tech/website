@@ -1,0 +1,60 @@
+---
+import { ArrowRight, FolderGit2, Mail, MessagesSquare } from 'lucide-react';
+import { socialLinks } from '@/lib/site';
+import { Separator } from '@/components/ui/separator';
+---
+
+<footer class="mt-16 border-t border-border/70 bg-background/70">
+  <div class="page-shell py-12 md:py-16">
+    <div class="grid gap-10 md:grid-cols-[1.3fr_0.7fr] md:items-start">
+      <div class="space-y-5">
+        <div class="eyebrow">Parents in Tech</div>
+        <h2 class="max-w-xl text-3xl md:text-4xl">Building safe, ad-free, and dopamine-free digital apps for our kids.</h2>
+        <p class="max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
+          Parents in Tech brings the community together on X and the work together in GitHub so people can contribute openly and stay aligned with the mission.
+        </p>
+        <a href="/invite" class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80">
+          Join the community
+          <ArrowRight className="h-4 w-4" />
+        </a>
+      </div>
+
+      <div class="grid gap-8 sm:grid-cols-2">
+        <div class="space-y-3">
+          <h3 class="font-sans text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">Navigate</h3>
+          <div class="flex flex-col gap-2">
+            <a class="link-subtle" href="/about">About</a>
+            <a class="link-subtle" href="/projects">Projects</a>
+            <a class="link-subtle" href="/contribute">Contribute</a>
+            <a class="link-subtle" href="/invite">Join</a>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h3 class="font-sans text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">Connect</h3>
+          <div class="flex flex-col gap-2 text-sm text-muted-foreground">
+            <a class="inline-flex items-center gap-2 hover:text-foreground" href={socialLinks[0].href} target="_blank" rel="noreferrer">
+              <FolderGit2 className="h-4 w-4" />
+              GitHub
+            </a>
+            <a class="inline-flex items-center gap-2 hover:text-foreground" href={socialLinks[1].href} target="_blank" rel="noreferrer">
+              <MessagesSquare className="h-4 w-4" />
+              X Community
+            </a>
+            <a class="inline-flex items-center gap-2 hover:text-foreground" href={socialLinks[2].href}>
+              <Mail className="h-4 w-4" />
+              Email
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <Separator className="my-8" />
+
+    <div class="flex flex-col gap-3 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
+      <p>&copy; {new Date().getFullYear()} Parents in Tech.</p>
+      <p>Open community on X. Open-source contribution in GitHub. Mission first.</p>
+    </div>
+  </div>
+</footer>
