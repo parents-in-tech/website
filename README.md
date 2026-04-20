@@ -1,47 +1,49 @@
-# Astro Starter Kit: Minimal
+# Parents in Tech San Francisco
+
+Warm editorial Astro site for the Parents in Tech community. The site now uses:
+
+- Astro with the Cloudflare adapter
+- Astro React islands for interactive UI
+- Tailwind CSS v4
+- A `shadcn/ui`-style component foundation in `src/components/ui`
+
+## Commands
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev
+npm run check
+npm run build
+npm run preview
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Structure
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+  components/
+    ui/             # shadcn-style primitives
+  layouts/
+  lib/              # site content and repo mapping helpers
+  pages/
+  styles/
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Content model
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- `src/lib/site.ts` contains shared navigation, proof points, FAQ content, and roadmap themes.
+- `src/lib/projects.ts` maps GitHub API responses into UI-friendly project summaries.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Current routes
 
-## 🧞 Commands
+- `/` community-first homepage
+- `/about` story, principles, and roadmap
+- `/projects` API-backed project catalog
+- `/invite` community onboarding and GitHub invite form
+- `/contribute` contributor guidance and project preview
 
-All commands are run from the root of the project, from a terminal:
+## Notes
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- The GitHub invite flow and repo API contracts are unchanged.
+- The projects UI depends on `GITHUB_TOKEN` being available in the same way as before.
+- Cloudflare builds may warn about the `SESSION` KV binding and Sharp support; those warnings come from the current adapter configuration and do not block the site build.

@@ -1,0 +1,62 @@
+---
+import { ArrowRight } from 'lucide-react';
+---
+
+<section class="section-space pt-12 md:pt-20">
+  <div class="page-shell">
+    <div class="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+      <div class="space-y-8 reveal-in">
+        <div class="eyebrow">Parents in Tech</div>
+        <div class="space-y-5">
+          <h1 class="max-w-4xl text-5xl leading-[0.92] text-balance md:text-7xl">
+            An open community building safe, ad-free, and dopamine-free digital apps for our kids.
+          </h1>
+          <p class="section-lead max-w-3xl">
+            Join the conversation on X, explore the live repositories in GitHub, and contribute to open-source projects that stay true to the mission.
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-3 sm:flex-row">
+          <a
+            href="/invite"
+            class="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-base font-medium text-primary-foreground [box-shadow:var(--primary-shadow)] transition hover:bg-primary/92"
+          >
+            Join the community
+            <ArrowRight className="h-4 w-4" />
+          </a>
+          <a
+            href="/projects"
+            class="inline-flex h-12 items-center justify-center rounded-full border border-border bg-background/80 px-6 text-base font-medium text-foreground transition hover:bg-accent hover:text-accent-foreground"
+          >
+            Explore projects
+          </a>
+        </div>
+      </div>
+
+      <div class="editorial-panel soft-grid relative overflow-hidden p-8 md:p-10">
+        <div class="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+        <div class="space-y-8">
+          <div class="space-y-3">
+            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-muted-foreground">What Parents in Tech stands for</p>
+            <div class="space-y-4 text-sm leading-7 text-muted-foreground md:text-base">
+              <p>The mission is the filter for every project.</p>
+              <p>The X community is where people gather and get context.</p>
+              <p>The GitHub org is where code, issues, demos, and contributions live.</p>
+            </div>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded-[1.5rem] border border-border/70 bg-background/80 p-5">
+              <p class="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">Community</p>
+              <p class="mt-2 text-lg font-medium text-foreground">Open to parents in tech who care about building healthier digital products for kids</p>
+            </div>
+            <div class="rounded-[1.5rem] border border-border/70 bg-background/80 p-5">
+              <p class="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">Contribution model</p>
+              <p class="mt-2 text-lg font-medium text-foreground">Open-source repos, visible codebases, demo links when available, and mission-aligned pull requests</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

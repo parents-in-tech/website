@@ -1,0 +1,40 @@
+---
+import type { JourneyStep } from '@/lib/site';
+import { ArrowRight } from 'lucide-react';
+
+interface Props {
+  items: JourneyStep[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="section-space">
+  <div class="page-shell">
+    <div class="section-heading">
+      <div class="eyebrow">How it works</div>
+      <h2 class="text-4xl leading-tight text-balance md:text-5xl">From community context to open-source contribution.</h2>
+      <p class="section-lead">
+        Join the public conversation first, then move into the repos when you know which project and contribution style fits you best.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+      {items.map((item, index) => (
+        <article class="editorial-panel relative p-6">
+          <div class="mb-6 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
+            0{index + 1}
+          </div>
+          <h3 class="text-2xl">{item.title}</h3>
+          <p class="mt-4 text-sm leading-7 text-muted-foreground">{item.description}</p>
+          {item.href && (
+            <a href={item.href} class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80">
+              Go there
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

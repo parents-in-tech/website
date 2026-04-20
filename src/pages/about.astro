@@ -1,462 +1,73 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '@/layouts/Layout.astro';
+import PageIntro from '@/components/PageIntro.astro';
+import ValueGrid from '@/components/ValueGrid.astro';
+import { aboutPrinciples, missionStatement, roadmapThemes } from '@/lib/site';
 ---
 
-<Layout title="About - Parents in Tech">
-	<main>
-		<div class="container">
-			<div class="hero-section">
-				<h1>About Parents in Tech</h1>
-				<p class="hero-subtitle">Uniting tech parents worldwide to build the future for our children</p>
-			</div>
+<Layout
+  title="About | Parents in Tech"
+  description="Learn the Parents in Tech mission, how the community works across X and GitHub, and what principles guide contribution."
+>
+  <PageIntro
+    eyebrow="About"
+    title="A mission-driven community for parents who build."
+    lead="Parents in Tech exists to create safe, ad-free, and dopamine-free digital apps for our kids by bringing parents together in the open."
+  />
 
-			<div class="content-grid">
-				<section class="mission-vision">
-					<div class="card mission-card">
-						<div class="card-icon">
-							<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-								<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-							</svg>
-						</div>
-						<h2>Mission</h2>
-						<p>To unite parents in the tech industry, fostering a collaborative community where we leverage our expertise to create innovative, open-source projects that inspire and educate children, while championing a balanced approach to tech careers and family life.</p>
-					</div>
+  <section class="pb-8 md:pb-12">
+    <div class="page-shell grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+      <article class="editorial-panel p-8 md:p-10">
+        <div class="eyebrow">Mission</div>
+        <h2 class="mt-5 text-4xl leading-tight md:text-5xl">{missionStatement}</h2>
+        <p class="mt-5 text-sm leading-7 text-muted-foreground md:text-base">
+          That mission is the shared standard for the community. It shapes what gets built, how people contribute, and what kinds of digital experiences belong inside the organization.
+        </p>
+      </article>
 
-					<div class="card vision-card">
-						<div class="card-icon">
-							<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-								<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-							</svg>
-						</div>
-						<h2>Vision</h2>
-						<p>To be the leading global community for tech-savvy parents, recognized for empowering families with cutting-edge, accessible educational tools and inspiring the next generation of digital innovators, all while promoting a supportive culture that celebrates the unique blend of parenting and technology.</p>
-					</div>
-				</section>
+      <div class="grid gap-6">
+        <article class="editorial-panel p-7">
+          <h3 class="text-2xl">How the community works</h3>
+          <p class="mt-4 text-sm leading-7 text-muted-foreground">
+            The X community is where people gather, discuss ideas, and share progress. The GitHub organization is where the repos, issues, codebases, and demos live.
+          </p>
+        </article>
 
-				<section class="goals-section">
-					<h2 class="section-title">High-Level Goals</h2>
-					
-					<div class="goals-grid">
-						<div class="card goal-category">
-							<div class="category-header">
-								<div class="category-icon">
-									<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-										<path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H16c-.8 0-1.54.37-2 1l-3 4v2h2l2.54-3.4L16.5 18H20z"/>
-									</svg>
-								</div>
-								<h3>Community & Collaboration</h3>
-							</div>
-							<ul class="goal-list">
-								<li>
-									<strong>Build a Thriving Parent Network</strong>: Create a vibrant and supportive community where tech parents can connect, share experiences, and mutually support each other in their professional and personal journeys.
-								</li>
-								<li>
-									<strong>Drive Open-Source Innovation</strong>: Facilitate the initiation and collaborative development of open-source projects specifically designed for children, drawing upon the diverse skills of our members.
-								</li>
-								<li>
-									<strong>Cultivate Knowledge Sharing</strong>: Establish a robust platform for members to exchange technical expertise, parenting insights, and best practices for raising tech-literate children.
-								</li>
-							</ul>
-						</div>
+        <article class="editorial-panel p-7">
+          <h3 class="text-2xl">What contribution should feel like</h3>
+          <p class="mt-4 text-sm leading-7 text-muted-foreground">
+            Open, respectful, and grounded in standard open-source practice: discuss ideas in the open, keep work scoped, document changes, and stay aligned with the mission.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-							<div class="card goal-category">
-							<div class="category-header">
-								<div class="category-icon">
-									<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-										<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-									</svg>
-								</div>
-								<h3>Project Development & Impact</h3>
-							</div>
-							<ul class="goal-list">
-								<li>
-									<strong>Deliver High-Quality Educational Tools</strong>: Develop engaging, age-appropriate, and beneficial open-source software, hardware, and educational content that fosters children's learning and development.
-								</li>
-								<li>
-									<strong>Enhance Digital Literacy</strong>: Create practical tools and resources that help children understand and safely interact with technology, building foundational digital skills.
-								</li>
-								<li>
-									<strong>Inspire Future Innovators</strong>: Design projects that spark curiosity and encourage children to explore STEM fields from an early age, nurturing their potential.
-								</li>
-								<li>
-									<strong>Champion Open Source</strong>: Showcase how collaborative, open-source development can yield invaluable resources for families around the world.
-								</li>
-							</ul>
-						</div>
+  <ValueGrid
+    eyebrow="Principles"
+    title="Principles that keep the mission real."
+    lead="These are the guardrails for what gets built and how people work together."
+    items={aboutPrinciples}
+  />
 
-							<div class="card goal-category">
-							<div class="category-header">
-								<div class="category-icon">
-									<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-										<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-									</svg>
-								</div>
-								<h3>Work-Life Integration</h3>
-							</div>
-							<ul class="goal-list">
-								<li>
-									<strong>Provide a Creative Outlet</strong>: Offer tech parents a fulfilling opportunity to apply their professional skills to meaningful personal projects that align with their family values.
-								</li>
-								<li>
-									<strong>Support Balanced Lifestyles</strong>: Cultivate a flexible and understanding environment that acknowledges the demands of both tech careers and parenting, enabling manageable and asynchronous contributions.
-								</li>
-							</ul>
-						</div>
-					</div>
-				</section>
+  <section class="section-space pt-2">
+    <div class="page-shell">
+      <div class="section-heading">
+        <div class="eyebrow">Roadmap</div>
+        <h2 class="text-4xl leading-tight text-balance md:text-5xl">What the community is building toward.</h2>
+        <p class="section-lead">
+          These themes keep the work practical: better mission-aligned apps, better contributor onboarding, and better stewardship of the community itself.
+        </p>
+      </div>
 
-				<section class="goals-2025">
-					<div class="card goals-2025-card">
-						<div class="card-header">
-							<div class="year-badge">2025</div>
-							<h2>Goals for 2025</h2>
-						</div>
-						
-						<div class="goals-2025-grid">
-							<div class="card goal-item">
-								<div class="goal-icon">
-									<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-										<path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H16c-.8 0-1.54.37-2 1l-3 4v2h2l2.54-3.4L16.5 18H20z"/>
-									</svg>
-								</div>
-								<div class="goal-content">
-									<h3>Build Community</h3>
-									<p>Build a vibrant community of parents from around the world.</p>
-									<div class="goal-target">
-										<span class="target-label">Ambitious Goal:</span>
-										<span class="target-number">1,000 members</span>
-									</div>
-								</div>
-							</div>
-
-							<div class="card goal-item">
-								<div class="goal-icon">
-									<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-										<path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/>
-									</svg>
-								</div>
-								<div class="goal-content">
-									<h3>Build Catalog</h3>
-									<p>Build a catalog of functional apps, maybe proof of concepts, using free quota from various services.</p>
-									<div class="goal-target">
-										<span class="target-label">Ambitious Goal:</span>
-										<span class="target-number">100 apps</span>
-									</div>
-								</div>
-							</div>
-
-							<div class="card goal-item">
-								<div class="goal-icon">
-									<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-										<path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/>
-									</svg>
-								</div>
-								<div class="goal-content">
-									<h3>Build Superapp</h3>
-									<p>Build a multi-platform superapp, that holds the catalog and lets you use the mini apps.</p>
-									<div class="goal-target">
-										<span class="target-label">Ambitious Goal:</span>
-										<span class="target-number">Play Store, App Store & Browsers</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-			</div>
-		</div>
-	</main>
+      <div class="mt-10 grid gap-6 lg:grid-cols-3">
+        {roadmapThemes.map((theme) => (
+          <article class="editorial-panel p-7">
+            <h3 class="text-2xl">{theme.title}</h3>
+            <p class="mt-4 text-sm leading-7 text-muted-foreground">{theme.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 </Layout>
-
-<style>
-	main {
-		margin: auto;
-		padding: 80px 1.5rem 1.5rem;
-		color: var(--text-primary);
-		min-height: 60vh;
-	}
-
-	.container {
-		max-width: 1200px;
-		margin: 0 auto;
-	}
-
-	.hero-section {
-		text-align: center;
-		margin-bottom: 4rem;
-	}
-
-	.hero-section h1 {
-		font-size: 3rem;
-		font-weight: 800;
-		margin-bottom: 1rem;
-		background: linear-gradient(135deg, #deea6f, #c9e001);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-	}
-
-	.hero-subtitle {
-		font-size: 1.25rem;
-		opacity: 0.85;
-		max-width: 600px;
-		margin: 0 auto;
-	}
-
-	.content-grid {
-		display: flex;
-		flex-direction: column;
-		gap: 3rem;
-	}
-
-	.mission-vision {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-		gap: 2rem;
-	}
-
-	.mission-card,
-	.vision-card {
-		display: flex;
-		flex-direction: column;
-		gap: 1.25rem;
-	}
-
-	.card-icon {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 3.25rem;
-		height: 3.25rem;
-		border-radius: 1.1rem;
-		background: rgba(201, 224, 1, 0.18);
-		color: #f7f5f2;
-		margin-bottom: 1.25rem;
-	}
-
-	.card-icon svg {
-		width: 24px;
-		height: 24px;
-	}
-
-	.card h2 {
-		font-size: 1.5rem;
-		font-weight: 700;
-		margin: 0;
-		color: var(--text-primary);
-	}
-
-	.card p {
-		line-height: 1.6;
-		opacity: 0.88;
-		margin: 0;
-	}
-
-	.section-title {
-		font-size: 2rem;
-		font-weight: 700;
-		text-align: center;
-		margin-bottom: 2rem;
-		color: var(--text-primary);
-	}
-
-	.goals-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-		gap: 2rem;
-	}
-
-	.goal-category {
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
-		min-height: 100%;
-	}
-
-	.category-header {
-		display: flex;
-		align-items: center;
-		gap: 0.85rem;
-	}
-
-	.category-icon {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 2.75rem;
-		height: 2.75rem;
-		border-radius: 0.9rem;
-		background: rgba(201, 224, 1, 0.16);
-		color: #f7f5f2;
-	}
-
-	.category-header h3 {
-		font-size: 1.25rem;
-		font-weight: 600;
-		margin: 0;
-		color: var(--text-primary);
-	}
-
-	.goal-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
-	}
-
-	.goal-list li {
-		line-height: 1.6;
-		opacity: 0.9;
-	}
-
-	.goal-list strong {
-		color: #c9e001;
-		font-weight: 600;
-	}
-
-	.goals-2025-card {
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
-		background: linear-gradient(155deg, rgba(47, 54, 18, 0.88), rgba(105, 108, 35, 0.85));
-		border-color: rgba(201, 224, 1, 0.38);
-	}
-
-	.card-header {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-	}
-
-	.year-badge {
-		background: #c9e001;
-		color: #12140a;
-		padding: 0.5rem 1rem;
-		border-radius: 2rem;
-		font-weight: 700;
-		font-size: 1.1rem;
-	}
-
-	.card-header h2 {
-		margin: 0;
-		font-size: 1.75rem;
-	}
-
-	.goals-2025-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-		gap: 1.5rem;
-	}
-
-	.goal-item {
-		display: grid;
-		grid-template-columns: auto 1fr;
-		gap: 1rem;
-		align-items: flex-start;
-		padding: 1.5rem;
-		background: linear-gradient(155deg, rgba(36, 42, 14, 0.9), rgba(105, 108, 35, 0.84));
-		border: 1px solid rgba(201, 224, 1, 0.28);
-		box-shadow: 0 20px 36px -24px rgba(24, 28, 12, 0.85);
-	}
-
-	.goal-item:hover {
-		transform: translateY(-4px);
-		border-color: rgba(201, 224, 1, 0.42);
-	}
-
-	.goal-item::before {
-		opacity: 0.25;
-	}
-
-	.goal-item:hover::before {
-		opacity: 0.45;
-	}
-
-	.goal-icon {
-		display: grid;
-		place-items: center;
-		width: 3rem;
-		height: 3rem;
-		border-radius: 1rem;
-		background: rgba(201, 224, 1, 0.18);
-		color: #f7f5f2;
-	}
-
-	.goal-icon svg {
-		width: 20px;
-		height: 20px;
-	}
-
-	.goal-content {
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-	}
-
-	.goal-content h3 {
-		font-size: 1.25rem;
-		font-weight: 600;
-		margin: 0;
-		color: var(--text-primary);
-	}
-
-	.goal-content p {
-		line-height: 1.5;
-		opacity: 0.9;
-		margin: 0;
-	}
-
-	.goal-target {
-		display: flex;
-		flex-direction: column;
-		gap: 0.35rem;
-	}
-
-	.target-label {
-		font-size: 0.875rem;
-		color: #deea6f;
-		font-weight: 500;
-	}
-
-	.target-number {
-		font-size: 1.1rem;
-		font-weight: 700;
-		color: white;
-	}
-
-	@media (max-width: 768px) {
-		.hero-section h1 {
-			font-size: 2.25rem;
-		}
-
-		.mission-vision {
-			grid-template-columns: 1fr;
-		}
-
-		.goals-grid {
-			grid-template-columns: 1fr;
-		}
-
-		.goals-2025-grid {
-			grid-template-columns: 1fr;
-		}
-
-		.card-header {
-			flex-direction: column;
-			align-items: flex-start;
-			gap: 0.75rem;
-		}
-
-		.category-header {
-			flex-direction: column;
-			align-items: flex-start;
-			gap: 0.6rem;
-		}
-
-		.goal-item {
-			grid-template-columns: 1fr;
-		}
-	}
-</style>
