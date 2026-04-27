@@ -1,5 +1,8 @@
 ---
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, FolderGit2 } from 'lucide-react';
+import { socialLinks } from '@/lib/site';
+
+const githubHref = socialLinks.find((link) => link.label === 'GitHub')?.href ?? 'https://github.com/parents-in-tech';
 ---
 
 <section class="section-space pt-12 md:pt-20">
@@ -12,23 +15,26 @@ import { ArrowRight } from 'lucide-react';
             An open community building safe, ad-free, and dopamine-free digital apps for our kids.
           </h1>
           <p class="section-lead max-w-3xl">
-            Join the conversation on X, explore the live repositories in GitHub, and contribute to open-source projects that stay true to the mission.
+            Explore the live repositories in GitHub and contribute to open-source projects that stay true to the mission.
           </p>
         </div>
 
-        <div class="flex flex-col gap-3 sm:flex-row">
+        <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <a
-            href="/invite"
+            href="/contribute#github-invite"
             class="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-base font-medium text-primary-foreground [box-shadow:var(--primary-shadow)] transition hover:bg-primary/92"
           >
-            Join the community
+            Request GitHub access
             <ArrowRight className="h-4 w-4" />
           </a>
           <a
-            href="/projects"
-            class="inline-flex h-12 items-center justify-center rounded-full border border-border bg-background/80 px-6 text-base font-medium text-foreground transition hover:bg-accent hover:text-accent-foreground"
+            href={githubHref}
+            target="_blank"
+            rel="noreferrer"
+            class="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-border bg-background/80 px-6 text-base font-medium text-foreground transition hover:bg-accent hover:text-accent-foreground"
           >
-            Explore projects
+            <FolderGit2 className="h-4 w-4" />
+            Browse on GitHub
           </a>
         </div>
       </div>
@@ -40,7 +46,6 @@ import { ArrowRight } from 'lucide-react';
             <p class="text-sm font-semibold uppercase tracking-[0.18em] text-muted-foreground">What Parents in Tech stands for</p>
             <div class="space-y-4 text-sm leading-7 text-muted-foreground md:text-base">
               <p>The mission is the filter for every project.</p>
-              <p>The X community is where people gather and get context.</p>
               <p>The GitHub org is where code, issues, demos, and contributions live.</p>
             </div>
           </div>

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { Menu, ArrowRight, MoonStar, Palette, SunMedium } from 'lucide-react';
-import { navItems } from '@/lib/site';
+import { Menu, ArrowRight, FolderGit2, MoonStar, Palette, SunMedium } from 'lucide-react';
+import { navItems, socialLinks } from '@/lib/site';
+
+const githubHref = socialLinks.find((link) => link.label === 'GitHub')?.href ?? 'https://github.com/parents-in-tech';
 import { Button } from '@/components/ui/button';
 import {
   NavigationMenu,
@@ -157,9 +159,14 @@ export function HeaderNav() {
         <Button type="button" variant="outline" size="icon" aria-label="Toggle light and dark mode" onClick={toggleThemeMode}>
           {mode === 'dark' ? <SunMedium /> : <MoonStar />}
         </Button>
+        <Button asChild variant="outline" size="icon" aria-label="Browse Parents in Tech on GitHub">
+          <a href={githubHref} target="_blank" rel="noreferrer">
+            <FolderGit2 />
+          </a>
+        </Button>
         <Button asChild size="sm">
-          <a href="/invite">
-            Join the community
+          <a href="/contribute#github-invite">
+            Request access
             <ArrowRight />
           </a>
         </Button>
@@ -176,7 +183,7 @@ export function HeaderNav() {
             <SheetHeader className="pr-10">
               <SheetTitle>Parents in Tech</SheetTitle>
               <SheetDescription>
-                Join the X community, explore the repos, and contribute to mission-aligned work in GitHub.
+                Explore the repos and contribute to mission-aligned work in GitHub.
               </SheetDescription>
             </SheetHeader>
 
@@ -200,11 +207,17 @@ export function HeaderNav() {
               ))}
             </nav>
 
-            <div className="mt-6">
+            <div className="mt-6 grid gap-3">
               <Button asChild className="w-full">
-                <a href="/invite">
-                  Join the community
+                <a href="/contribute#github-invite">
+                  Request access
                   <ArrowRight />
+                </a>
+              </Button>
+              <Button asChild variant="outline" className="w-full">
+                <a href={githubHref} target="_blank" rel="noreferrer">
+                  <FolderGit2 />
+                  Browse on GitHub
                 </a>
               </Button>
             </div>
