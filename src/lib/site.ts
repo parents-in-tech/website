@@ -43,14 +43,11 @@ export const missionStatement = 'To create safe, ad-free, and dopamine-free digi
 
 export const navItems: NavItem[] = [
   { href: '/about', label: 'About' },
-  { href: '/projects', label: 'Projects' },
   { href: '/contribute', label: 'Contribute' },
-  { href: '/invite', label: 'Join' },
 ];
 
 export const socialLinks: LinkItem[] = [
   { href: 'https://github.com/parents-in-tech', label: 'GitHub' },
-  { href: 'https://x.com/i/communities/1969469616515674424', label: 'X Community' },
   { href: 'mailto:hello@parentsintech.org', label: 'Email' },
 ];
 
@@ -60,8 +57,8 @@ export const communityProof: ProofItem[] = [
     detail: 'Every project is expected to support the mission: safe, ad-free, and dopamine-free digital apps for our kids.',
   },
   {
-    label: 'Open community',
-    detail: 'Conversation happens in the X community, and anyone aligned with the mission can learn, listen, and participate.',
+    label: 'Open contribution',
+    detail: 'Work happens in the open on GitHub, and anyone aligned with the mission can read along, file issues, and contribute.',
   },
   {
     label: 'Open-source workflow',
@@ -79,8 +76,8 @@ export const valuePillars: ValuePillar[] = [
     body: 'The community exists to build digital products that are safer for kids, without ads, addictive reward loops, or attention-hacking mechanics.',
   },
   {
-    title: 'Open community, open repos',
-    body: 'People can join the X community to get context, then move into the GitHub org to contribute through issues, pull requests, docs, design, and testing.',
+    title: 'Open repos, open contribution',
+    body: 'The GitHub organization is where the work lives. Anyone aligned with the mission can contribute through issues, pull requests, docs, design, and testing.',
   },
   {
     title: 'Contributions that fit real life',
@@ -90,19 +87,19 @@ export const valuePillars: ValuePillar[] = [
 
 export const journeySteps: JourneyStep[] = [
   {
-    title: 'Join the conversation',
-    description: 'Start in the X community to meet other parents, understand the mission, and see which projects are active.',
-    href: '/invite',
+    title: 'Read the mission',
+    description: 'Start with the mission and principles to understand what kind of digital products this community is here to build.',
+    href: '/about',
   },
   {
     title: 'Browse active repos',
     description: 'Review the live repositories, codebases, and demo URLs to find projects that match the mission and your skills.',
-    href: '/projects',
+    href: '/contribute#projects',
   },
   {
     title: 'Request GitHub access',
     description: 'When you are ready to contribute in the open, request a GitHub organization invite from the join page.',
-    href: '/invite#github-invite',
+    href: '/contribute#github-invite',
   },
   {
     title: 'Make a first contribution',
@@ -132,8 +129,8 @@ export const inviteFaq: FaqItem[] = [
     answer: 'People who want to contribute directly to repositories, documentation, design, or project operations should request access after getting oriented in the community.',
   },
   {
-    question: 'Can I join the community without contributing code?',
-    answer: 'Yes. The public X community is the right entry point for anyone who wants to listen, learn, share resources, or explore before contributing.',
+    question: 'Can I follow along without contributing code?',
+    answer: 'Yes. The GitHub organization is public, so anyone can read the repos, follow issues and discussions, and explore the projects before deciding to contribute.',
   },
   {
     question: 'What contribution guidelines do you follow?',
@@ -167,7 +164,7 @@ export const roadmapThemes: RoadmapTheme[] = [
   },
   {
     title: 'Community stewardship',
-    description: 'Keep the X community welcoming, useful, and centered on the mission so contributors and families know what the group stands for.',
+    description: 'Keep the projects welcoming, useful, and centered on the mission so contributors and families know what the group stands for.',
   },
 ];
 

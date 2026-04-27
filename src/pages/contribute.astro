@@ -1,14 +1,38 @@
 ---
 import ContributionPath from '@/components/ContributionPath.astro';
+import { FaqList } from '@/components/FaqList';
 import Layout from '@/layouts/Layout.astro';
 import PageIntro from '@/components/PageIntro.astro';
-import { ProjectPreview } from '@/components/ProjectPreview';
-import { contributionTracks, journeySteps } from '@/lib/site';
+import { ProjectsBrowser } from '@/components/ProjectsBrowser';
+import { contributionTracks, inviteFaq, journeySteps, socialLinks } from '@/lib/site';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+
+const url = new URL(Astro.request.url);
+const success = url.searchParams.get('success');
+const error = url.searchParams.get('error');
+
+const errorCopy: Record<string, string> = {
+  'missing-identifier': 'Please provide a valid GitHub username or email address.',
+  'user-not-found': 'GitHub user not found. Check the username and try again.',
+  'already-member': "You're already a member of the Parents in Tech organization.",
+  'pending-invitation': 'You already have a pending invitation. Check your email for the GitHub invite.',
+  'membership-conflict': "GitHub reports you're already associated with the organization, but the status could not be verified cleanly.",
+  'validation-failed': 'GitHub validation failed. Check the identifier and try again.',
+  'need-org-admin': 'The GitHub token needs organization admin permissions to create invitations.',
+  'permission-denied': 'The invite request could not be sent because of GitHub permissions.',
+  'server-config': 'There is a server configuration issue with the GitHub token.',
+  'github-api': 'GitHub returned an API error. Please try again later.',
+  'unexpected': 'An unexpected error occurred while processing the invitation.',
+};
+
+const githubHref = socialLinks.find((link) => link.label === 'GitHub')?.href ?? 'https://github.com/parents-in-tech';
 ---
 
 <Layout
   title="Contribute | Parents in Tech"
-  description="Learn how Parents in Tech handles open-source contribution, what kinds of work are welcome, and how to contribute while staying aligned with the mission."
+  description="Learn how Parents in Tech handles open-source contribution, request access to the GitHub organization, and contribute to mission-aligned projects."
 >
   <PageIntro
     eyebrow="Contribute"
@@ -35,36 +59,107 @@ import { contributionTracks, journeySteps } from '@/lib/site';
     </div>
   </section>
 
-  <ProjectPreview
-    client:visible
-    limit={6}
-    title="Current repositories you can learn from or contribute to"
-    lead="These cards come from the live GitHub organization so contributors can inspect the real codebases and follow demos when they exist."
-  />
+  <section class="section-space pt-4" id="projects">
+    <div class="page-shell">
+      <div class="section-heading">
+        <div class="eyebrow">Live from GitHub</div>
+        <h2 class="text-4xl leading-tight text-balance md:text-5xl">Browse the repos, codebases, and demo URLs behind the community.</h2>
+        <p class="section-lead">
+          This section reflects the actual GitHub organization: every public repository, its codebase, and its demo link whenever a project publishes one.
+        </p>
+      </div>
+
+      <div class="editorial-panel mt-10 grid gap-px overflow-hidden lg:grid-cols-3">
+        <div class="surface-wash p-6 md:p-7">
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary">All</p>
+          <p class="mt-3 text-sm leading-7 text-muted-foreground">Browse the full organization and open the GitHub codebase for any project you want to inspect.</p>
+        </div>
+        <div class="surface-wash p-6 md:p-7">
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Recently updated</p>
+          <p class="mt-3 text-sm leading-7 text-muted-foreground">See what moved most recently when you want the quickest view of what the community is actively touching.</p>
+        </div>
+        <div class="surface-wash p-6 md:p-7">
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Needs contributors</p>
+          <p class="mt-3 text-sm leading-7 text-muted-foreground">Shows repositories whose current metadata signals contributor demand. If none are tagged that way, the page says so honestly.</p>
+        </div>
+      </div>
+
+      <ProjectsBrowser client:visible />
+    </div>
+  </section>
 
   <section class="section-space pt-4">
-    <div class="page-shell">
-      <div class="editorial-panel grid gap-6 overflow-hidden lg:grid-cols-[1fr_auto] lg:items-center">
-        <div class="surface-wash p-8 md:p-10">
-          <div class="eyebrow">Ready when you are</div>
-          <h2 class="mt-5 text-4xl leading-tight md:text-5xl">Join the community, read the repos, and contribute in the open.</h2>
-          <p class="mt-5 max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
-            The sequence is simple on purpose: community context first, then GitHub access, then mission-aligned contributions that fit your time and strengths.
-          </p>
-        </div>
-        <div class="flex flex-col gap-3 px-8 pb-8 lg:pr-10 lg:pb-0">
-          <a
-            href="/projects"
-            class="inline-flex h-11 items-center justify-center rounded-full border border-border bg-background/80 px-5 text-sm font-medium text-foreground transition hover:bg-accent hover:text-accent-foreground"
-          >
-            Explore projects
-          </a>
-          <a
-            href="/invite#github-invite"
-            class="inline-flex h-11 items-center justify-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground [box-shadow:var(--primary-shadow)] transition hover:bg-primary/92"
-          >
-            Request GitHub access
-          </a>
+    <div class="page-shell grid gap-6 xl:grid-cols-[0.92fr_1.08fr]">
+      <article class="editorial-panel p-7 md:p-8" id="github-invite">
+        <div class="eyebrow">Get involved</div>
+        <h2 class="mt-5 text-3xl leading-tight md:text-4xl">Request GitHub access when you are ready to help directly.</h2>
+        <p class="mt-4 text-sm leading-7 text-muted-foreground md:text-base">
+          The GitHub organization is where the repositories live. Request access when you want to contribute directly through open-source workflows.
+        </p>
+        <a
+          href={githubHref}
+          target="_blank"
+          rel="noreferrer"
+          class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80"
+        >
+          Browse the org first →
+        </a>
+      </article>
+
+      <div class="grid gap-6">
+        {success && (
+          <Alert variant="success">
+            <AlertTitle>Invitation sent</AlertTitle>
+            <AlertDescription>
+              GitHub should send the organization invitation by email. Once it arrives, you can accept it and start contributing to the repos.
+            </AlertDescription>
+          </Alert>
+        )}
+
+        {error && (
+          <Alert variant="destructive">
+            <AlertTitle>Invitation failed</AlertTitle>
+            <AlertDescription>
+              {errorCopy[error] ?? 'There was an issue sending the invitation. Please try again or contact hello@parentsintech.org.'}
+            </AlertDescription>
+          </Alert>
+        )}
+
+        {!success && (
+          <div class="editorial-panel p-7 md:p-8">
+            <div class="eyebrow">GitHub access</div>
+            <h2 class="mt-5 text-3xl leading-tight md:text-4xl">Request an organization invitation.</h2>
+            <p class="mt-4 text-sm leading-7 text-muted-foreground md:text-base">
+              Use your GitHub username or the email address associated with your GitHub account.
+            </p>
+
+            <form method="POST" action="/api/invite" class="mt-8 grid gap-4">
+              <label class="grid gap-2 text-sm font-medium text-foreground" for="identifier">
+                GitHub username or email
+                <Input
+                  type="text"
+                  id="identifier"
+                  name="identifier"
+                  placeholder="your-username or email@example.com"
+                  required
+                />
+              </label>
+
+              <Button type="submit" className="w-full sm:w-fit">
+                Request invite
+              </Button>
+            </form>
+          </div>
+        )}
+
+        <div class="editorial-panel p-7 md:p-8">
+          <div class="section-heading max-w-none">
+            <div class="eyebrow">Before you submit</div>
+            <h2 class="text-3xl leading-tight md:text-4xl">A few practical answers.</h2>
+          </div>
+          <div class="mt-6">
+            <FaqList client:visible items={inviteFaq} />
+          </div>
         </div>
       </div>
     </div>

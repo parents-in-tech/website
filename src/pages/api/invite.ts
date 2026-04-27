@@ -10,13 +10,13 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     const identifier = body.get('identifier');
     
     if (!identifier || typeof identifier !== 'string' || identifier.trim() === '') {
-      return redirect('/invite?error=missing-identifier');
+      return redirect('/contribute?error=missing-identifier#github-invite');
     }
 
     const token = env.GITHUB_TOKEN ?? import.meta.env.GITHUB_TOKEN;
     if (!token) {
       console.error('GITHUB_TOKEN environment variable is not set');
-      return redirect('/invite?error=server-config');
+      return redirect('/contribute?error=server-config#github-invite');
     }
 
     const octokit = new Octokit({ auth: token });
@@ -41,7 +41,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
       } catch (error: any) {
         if (error.status === 404) {
           console.error(`User not found: ${trimmedIdentifier}`);
-          return redirect('/invite?error=user-not-found');
+          return redirect('/contribute?error=user-not-found#github-invite');
         }
         throw error; // Re-throw other errors
       }
@@ -76,7 +76,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
               }
             });
             // If the above doesn't throw, they are a member
-            return redirect('/invite?error=already-member');
+            return redirect('/contribute?error=already-member#github-invite');
           } catch (memberError: any) {
             if (memberError.status === 404) {
               // Not a member, check for pending invitations
@@ -91,7 +91,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
                   inv.email === trimmedIdentifier || inv.login === trimmedIdentifier
                 );
                 if (hasPendingInvite) {
-                  return redirect('/invite?error=pending-invitation');
+                  return redirect('/contribute?error=pending-invitation#github-invite');
                 }
               } catch (invitationError: any) {
                 console.error('Error checking for pending invitations:', invitationError);
@@ -101,24 +101,24 @@ export const POST: APIRoute = async ({ request, redirect }) => {
             }
           }
           // If checks are inconclusive but there was a 422, redirect
-          return redirect('/invite?error=membership-conflict');
+          return redirect('/contribute?error=membership-conflict#github-invite');
         }
-        return redirect('/invite?error=validation-failed');
+        return redirect('/contribute?error=validation-failed#github-invite');
       } else if (error.status === 403) {
         const errorText = JSON.stringify(error.response?.data || {});
         if (errorText.includes('admin to create an invitation')) {
-          return redirect('/invite?error=need-org-admin');
+          return redirect('/contribute?error=need-org-admin#github-invite');
         }
-        return redirect('/invite?error=permission-denied');
+        return redirect('/contribute?error=permission-denied#github-invite');
       }
 
-      return redirect('/invite?error=github-api');
+      return redirect('/contribute?error=github-api#github-invite');
     }
 
-    return redirect('/invite?success=true');
+    return redirect('/contribute?success=true#github-invite');
     
   } catch (error: any) {
     console.error('Unexpected error in invite API:', error);
-    return redirect('/invite?error=unexpected');
+    return redirect('/contribute?error=unexpected#github-invite');
   }
 };
