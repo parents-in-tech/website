@@ -3,7 +3,6 @@ import ContributionPath from '@/components/ContributionPath.astro';
 import { FaqList } from '@/components/FaqList';
 import Layout from '@/layouts/Layout.astro';
 import PageIntro from '@/components/PageIntro.astro';
-import { ProjectsBrowser } from '@/components/ProjectsBrowser';
 import { contributionTracks, inviteFaq, journeySteps, socialLinks } from '@/lib/site';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
@@ -56,35 +55,6 @@ const githubHref = socialLinks.find((link) => link.label === 'GitHub')?.href ?? 
           )}
         </article>
       ))}
-    </div>
-  </section>
-
-  <section class="section-space pt-4" id="projects">
-    <div class="page-shell">
-      <div class="section-heading">
-        <div class="eyebrow">Live from GitHub</div>
-        <h2 class="text-4xl leading-tight text-balance md:text-5xl">Browse the repos, codebases, and demo URLs behind the community.</h2>
-        <p class="section-lead">
-          This section reflects the actual GitHub organization: every public repository, its codebase, and its demo link whenever a project publishes one.
-        </p>
-      </div>
-
-      <div class="editorial-panel mt-10 grid gap-px overflow-hidden lg:grid-cols-3">
-        <div class="surface-wash p-6 md:p-7">
-          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary">All</p>
-          <p class="mt-3 text-sm leading-7 text-muted-foreground">Browse the full organization and open the GitHub codebase for any project you want to inspect.</p>
-        </div>
-        <div class="surface-wash p-6 md:p-7">
-          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Recently updated</p>
-          <p class="mt-3 text-sm leading-7 text-muted-foreground">See what moved most recently when you want the quickest view of what the community is actively touching.</p>
-        </div>
-        <div class="surface-wash p-6 md:p-7">
-          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Needs contributors</p>
-          <p class="mt-3 text-sm leading-7 text-muted-foreground">Shows repositories whose current metadata signals contributor demand. If none are tagged that way, the page says so honestly.</p>
-        </div>
-      </div>
-
-      <ProjectsBrowser client:visible />
     </div>
   </section>
 

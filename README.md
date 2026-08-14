@@ -24,7 +24,8 @@ src/
   components/
     ui/             # shadcn-style primitives
   layouts/
-  lib/              # site content and repo mapping helpers
+  data/             # curated project catalog
+  lib/              # shared site content
   pages/
   styles/
 ```
@@ -32,18 +33,18 @@ src/
 ## Content model
 
 - `src/lib/site.ts` contains shared navigation, proof points, FAQ content, and roadmap themes.
-- `src/lib/projects.ts` maps GitHub API responses into UI-friendly project summaries.
+- `src/data/projects.ts` contains the curated project catalog used by the homepage and Projects page.
 
 ## Current routes
 
 - `/` community-first homepage
 - `/about` story, principles, and roadmap
-- `/projects` API-backed project catalog
-- `/invite` community onboarding and GitHub invite form
-- `/contribute` contributor guidance and project preview
+- `/projects` curated project catalog
+- `/contribute` contributor guidance and GitHub invite form
 
 ## Notes
 
-- The GitHub invite flow and repo API contracts are unchanged.
-- The projects UI depends on `GITHUB_TOKEN` being available in the same way as before.
+- Project cards are rendered from checked-in data and do not call the GitHub API.
+- Keep archived projects out of `src/data/projects.ts`, and only expose repository links for public GitHub repositories.
+- `GITHUB_TOKEN` is required only for the GitHub organization invite flow.
 - Cloudflare builds may warn about the `SESSION` KV binding and Sharp support; those warnings come from the current adapter configuration and do not block the site build.

@@ -43,6 +43,7 @@ export const missionStatement = 'To create safe, ad-free, and dopamine-free digi
 
 export const navItems: NavItem[] = [
   { href: '/about', label: 'About' },
+  { href: '/projects', label: 'Projects' },
   { href: '/contribute', label: 'Contribute' },
 ];
 
@@ -66,7 +67,7 @@ export const communityProof: ProofItem[] = [
   },
   {
     label: 'Real projects',
-    detail: 'The projects page pulls live repositories and shows the GitHub codebase plus the demo URL whenever a repo has one.',
+    detail: 'The projects page shows each project’s repository, landing page, and demo whenever they are available.',
   },
 ];
 
@@ -92,9 +93,9 @@ export const journeySteps: JourneyStep[] = [
     href: '/about',
   },
   {
-    title: 'Browse active repos',
-    description: 'Review the live repositories, codebases, and demo URLs to find projects that match the mission and your skills.',
-    href: '/contribute#projects',
+    title: 'Explore the projects',
+    description: 'Review active and upcoming projects, their repositories, and available demos to find work that matches the mission and your skills.',
+    href: '/projects',
   },
   {
     title: 'Request GitHub access',

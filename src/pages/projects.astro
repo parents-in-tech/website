@@ -1,0 +1,22 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageIntro from '@/components/PageIntro.astro';
+import ProjectGrid from '@/components/ProjectGrid.astro';
+---
+
+<Layout
+  title="Projects | Parents in Tech"
+  description="Explore active and upcoming Parents in Tech projects, their repositories, landing pages, and demos."
+>
+  <PageIntro
+    eyebrow="Projects"
+    title="Digital experiences built for kids, not engagement metrics."
+    lead="Explore the community’s active work and projects still taking shape. Open the repository, landing page, or demo whenever one is available."
+  />
+
+  <section class="pb-8 md:pb-12">
+    <div class="page-shell">
+      <ProjectGrid />
+    </div>
+  </section>
+</Layout>
