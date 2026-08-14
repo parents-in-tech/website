@@ -4,7 +4,7 @@ import { FaqList } from '@/components/FaqList';
 import Hero from '@/components/Hero.astro';
 import JoinSteps from '@/components/JoinSteps.astro';
 import Layout from '@/layouts/Layout.astro';
-import { ProjectPreview } from '@/components/ProjectPreview';
+import ProjectGrid from '@/components/ProjectGrid.astro';
 import ProofStrip from '@/components/ProofStrip.astro';
 import ValueGrid from '@/components/ValueGrid.astro';
 import { communityProof, contributionTracks, homepageFaq, journeySteps, missionStatement, valuePillars } from '@/lib/site';
@@ -24,12 +24,25 @@ import { communityProof, contributionTracks, homepageFaq, journeySteps, missionS
     items={valuePillars}
   />
 
-  <ProjectPreview
-    client:visible
-    limit={3}
-    title="Projects already moving inside the GitHub organization"
-    lead="Browse the live repositories, codebases, and any demo URLs attached to them, so people can see the work before they contribute."
-  />
+  <section class="section-space pt-4">
+    <div class="page-shell">
+      <div class="section-heading">
+        <div class="eyebrow">Community projects</div>
+        <h2 class="text-4xl leading-tight text-balance md:text-5xl">Projects already moving inside the community.</h2>
+        <p class="section-lead">
+          Explore the projects, repositories, and demos that are ready to share, so you can see the work before contributing.
+        </p>
+      </div>
+
+      <div class="mt-10">
+        <ProjectGrid limit={3} />
+      </div>
+
+      <a href="/projects" class="mt-8 inline-flex text-sm font-semibold text-primary hover:text-primary/80">
+        View all projects →
+      </a>
+    </div>
+  </section>
 
   <JoinSteps items={journeySteps} />
   <ContributionPath items={contributionTracks} />
