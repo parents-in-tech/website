@@ -45,5 +45,6 @@ src/
 ## Notes
 
 - Project cards are rendered from checked-in data and do not call the GitHub API.
+- Keep archived projects out of `src/data/projects.ts`, and only expose repository links for public GitHub repositories.
 - `GITHUB_TOKEN` is required only for the GitHub organization invite flow.
 - Cloudflare builds may warn about the `SESSION` KV binding and Sharp support; those warnings come from the current adapter configuration and do not block the site build.
