@@ -21,7 +21,7 @@ export const projects: Project[] = [
 		description:
 			"A multilingual story library with illustrations and read-aloud narration.",
 		status: "active",
-		landing: "https://balakatha.parentsintech.org",
+		landing: "https://balakatha.app",
 	},
 	{
 		slug: "langlang",
