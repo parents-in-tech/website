@@ -3,7 +3,7 @@ main = "@astrojs/cloudflare/entrypoints/server"
 account_id = "6d2e606929eb69f91f43b147615f1111"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
-workers_dev = true
+workers_dev = false
 routes = [{ pattern = "parentsintech.org/*", zone_name = "parentsintech.org" }]
 
 # Asset handling
